@@ -11,24 +11,24 @@
     - name: copy war from Jenkins to target host
       copy:
         src: /var/lib/jenkins/workspace/Vlad oglinda-Deploy-on-Container-using-Ansible/webapp/target/webapp.war
-        dest: /opt/docker/vlad
+        dest: /opt/docker/vlad oglinda
 
     - name: stop current container
-      command: docker stop vlad-devops-container
+      command: docker stop vlad oglinda-devops-container
       ignore_errors: yes # in case container doesn't exist
 
     - name: remove stopped container
-      command: docker rm vlad-devops-container
+      command: docker rm vlad oglinda-devops-container
       ignore_errors: yes # in case container doesn't exist
 
     - name: remove docker images 
-      command: docker rmi vlad-devops-image:latest
+      command: docker rmi vlad oglinda-devops-image:latest
       ignore_errors: yes # in case image does not exist
 
     - name: create docker image using war file
-      command: docker build -t vlad-devops-image:latest .
+      command: docker build -t vlad oglinda-devops-image:latest .
       args:
-        chdir: /opt/docker/vlad
+        chdir: /opt/docker/vlad oglinda
 
     - name: run container from docker image
-      command: docker run -d --name vlad-devops-container -p 8081:8080 vlad-devops-image:latest
+      command: docker run -d --name vlad oglinda-devops-container -p 8081:8080 vlad oglinda-devops-image:latest
